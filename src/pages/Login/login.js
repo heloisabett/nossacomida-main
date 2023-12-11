@@ -45,6 +45,8 @@ const loginStyles = StyleSheet.create({
     padding: 15,
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: 150,
+    marginRight: 150,
   },
 });
 
@@ -62,14 +64,17 @@ function LoginScreen({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.137.170:19003/api/token/custom/', {
+      const response = await axios.post('https://ourfood-backend.1.us-1.fl0.io/api/token/', {
         email,
         password,
       });
+
+      console.log(await response.data)
       await AsyncStorage.setItem('token', response.data.access);
-      await AsyncStorage.setItem('userData', JSON.stringify(response.data.user)); 
+      //await AsyncStorage.setItem('userData', JSON.stringify(response.data.user)); 
       navigation.navigate('HomeScreen');
     } catch (error) {
+      console.log(error)
       startShakeAnimation();
       Alert.alert('Erro no Login', 'Credenciais inválidas');
     }

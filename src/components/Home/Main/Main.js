@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, ScrollView, TextInput, Image, Text, TouchableOpacity, StatusBar, StyleSheet, Picker, Modal, FlatList
+  View, ScrollView, TextInput, Image, Text, TouchableOpacity, StatusBar, StyleSheet, Modal, FlatList
 } from "react-native";
+import { Picker } from "@react-native-picker/picker"
 import { MaterialIcons } from '@expo/vector-icons'; 
 import produtoService from "../../../services/produtos";
 import styles from "./style";
@@ -21,7 +22,7 @@ export default function Main() {
   };
 
   const getCategorias = async () => {
-    const data = await fetch('http://192.168.137.170:19003/api/categorias/')
+    const data = await fetch('http://ourfood-backend.1.us-1.fl0.io/api/categorias/')
                       .then(response => response.json());
     setCategorias(data);
   };
